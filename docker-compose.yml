@@ -1,0 +1,30 @@
+version: '3'
+services:
+  nest-app:
+    image: node:14 # You can change the Node.js version as needed
+    container_name: nest-app
+    working_dir: /app
+    volumes:
+      - ./:/app
+    environment:
+      - PORT=3000
+      - POSTGRES_HOST=127.0.0.1
+      - POSTGRES_PORT=5432
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=83355806
+      - POSTGRES_DB=chat
+    ports:
+      - "3000:3000"
+    command: npm run start:dev # Adjust your startup command as needed
+    depends_on:
+      - postgres
+
+  postgres:
+    image: postgres:latest
+    container_name: postgres
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=83355806
+      - POSTGRES_DB=chat
+    ports:
+      - "5432:5432"
