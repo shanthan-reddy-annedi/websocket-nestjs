@@ -21,7 +21,6 @@ export class UsersService {
       throw new HttpException(`User name already taken`, 402);
     }
     let user: Users = this.userRepository.create(userDto);
-    console.log(user);
     user = await this.userRepository.save(user);
     return user;
   }
