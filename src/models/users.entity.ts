@@ -6,8 +6,8 @@ export class Users {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
-  @Column({ unique: true })
-  username: string;
+  @Column({ unique: true, nullable: false, name: 'user_name' })
+  userName: string;
 
   @Column({ nullable: true })
   email: string;
@@ -15,10 +15,10 @@ export class Users {
   @Column()
   firstName: string;
 
-  @Column()
+  @Column({nullable: true})
   lastName: string;
 
-  @Column({ select: false })
+  @Column()
   @Exclude()
   password: string;
 }
