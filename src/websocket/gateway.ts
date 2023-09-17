@@ -22,11 +22,14 @@ export class MessagingGateway implements OnGatewayConnection, OnGatewayDisconnec
     console.log('Incoming Connection');
     this.sessions.setUserSocket(socket.handshake.headers.user as string, socket);
     socket.emit('connected', {});
+    // making the socket join the room
+    // we can use rooms to make different divices of users connect to same room. so that all the devices gets updated
+    socket.join(socket.handshake.headers.user);
   }
 
   handleDisconnect(socket: AuthenticatedSocket) {
     console.log('handleDisconnect');
-    console.log(`${socket.userId} disconnected.`);
+    console.log(`${socket.handshake.headers.user} disconnected.`);
     this.sessions.removeUserSocket(socket.userId);
   }
 
@@ -42,6 +45,6 @@ export class MessagingGateway implements OnGatewayConnection, OnGatewayDisconnec
   sendMessage(payload: Conversation){
     console.log('Inside conversation.create');
     const recipientSocket = this.sessions.getUserSocket(payload.recipientId);
-    if (recipientSocket) recipientSocket.emit(Subcriptions.SEND_MESSAGE, payload);
+    if (recipientSocket) this.server.to(payload.recipientId).emit(Subcriptions.SEND_MESSAGE, payload);
   }
 }
