@@ -2,9 +2,9 @@ import { MessageBody, OnGatewayConnection, OnGatewayDisconnect, SubscribeMessage
 import { GatewaySessionManager } from './gateway.session';
 import { AuthenticatedSocket } from 'src/utils/interfaces';
 import { Server } from 'socket.io';
-import { Inject } from '@nestjs/common';
 import { OnEvent } from '@nestjs/event-emitter';
 import { Conversation } from 'src/models/conversation.entity';
+import { Subcriptions } from 'src/utils/Events';
 
 @WebSocketGateway({
     cors: {
@@ -30,18 +30,18 @@ export class MessagingGateway implements OnGatewayConnection, OnGatewayDisconnec
     this.sessions.removeUserSocket(socket.userId);
   }
 
-  @SubscribeMessage('createMessage')
+  //here createMessage is the event name we send messages to from the client
+  @SubscribeMessage(Subcriptions.BROADCAST)
   handleCreateMessage(@MessageBody() data: any) {
     console.log('Create Message');
-    this.server.emit(`${data}`)
+    // here down below createMessage is the event we listen to from client side
+    this.server.emit(Subcriptions.BROADCAST,`${data}`)
   }
 
-  @OnEvent('message.create')
+  @OnEvent(Subcriptions.MESSAGE_CREATE)
   sendMessage(payload: Conversation){
     console.log('Inside conversation.create');
     const recipientSocket = this.sessions.getUserSocket(payload.recipientId);
-    console.log(`userId: ${payload.recipientId}`);
-    console.log(`recipientSocket ${recipientSocket.id}`);
-    if (recipientSocket) recipientSocket.emit('onConversation', payload);
+    if (recipientSocket) recipientSocket.emit(Subcriptions.SEND_MESSAGE, payload);
   }
 }

@@ -1,8 +1,9 @@
 import { Body, Controller, Post } from '@nestjs/common';
 import { UsersService } from './users.service';
 import { CreateUserDto } from './dto/users.dto';
+import { Routes } from 'src/utils/routs';
 
-@Controller('users')
+@Controller(Routes.USER)
 export class UsersController {
     constructor(private readonly userService: UsersService) {}
 

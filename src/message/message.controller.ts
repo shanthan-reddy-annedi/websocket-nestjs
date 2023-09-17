@@ -1,8 +1,9 @@
 import { Body, Controller, Post } from '@nestjs/common';
 import { MessageService } from './message.service';
 import { PostMessage } from './dto/message.dto';
+import { Routes } from 'src/utils/routs';
 
-@Controller('message')
+@Controller(Routes.MESSAGE)
 export class MessageController {
   constructor(private readonly messageService: MessageService) {}
 
