@@ -1,4 +1,11 @@
-import { MessageBody, OnGatewayConnection, OnGatewayDisconnect, SubscribeMessage, WebSocketGateway, WebSocketServer } from '@nestjs/websockets';
+import {
+  MessageBody,
+  OnGatewayConnection,
+  OnGatewayDisconnect,
+  SubscribeMessage,
+  WebSocketGateway,
+  WebSocketServer,
+} from '@nestjs/websockets';
 import { GatewaySessionManager } from './gateway.session';
 import { AuthenticatedSocket } from 'src/utils/interfaces';
 import { Server } from 'socket.io';
@@ -7,20 +14,22 @@ import { Conversation } from 'src/models/conversation.entity';
 import { Subcriptions } from 'src/utils/Events';
 
 @WebSocketGateway({
-    cors: {
-      origin: '*',
-    },
-  })
-export class MessagingGateway implements OnGatewayConnection, OnGatewayDisconnect
+  cors: {
+    origin: '*',
+  },
+})
+export class MessagingGateway
+  implements OnGatewayConnection, OnGatewayDisconnect
 {
-  constructor(
-    private readonly sessions: GatewaySessionManager
-  ) {}
+  constructor(private readonly sessions: GatewaySessionManager) {}
   @WebSocketServer()
   server: Server;
   handleConnection(socket: AuthenticatedSocket, ...args: any[]) {
     console.log('Incoming Connection');
-    this.sessions.setUserSocket(socket.handshake.headers.user as string, socket);
+    this.sessions.setUserSocket(
+      socket.handshake.headers.user as string,
+      socket,
+    );
     socket.emit('connected', {});
     // we can use rooms to make different divices of users connect to same room. so that all the devices gets updated
     socket.join(socket.handshake.headers.user);
@@ -37,13 +46,16 @@ export class MessagingGateway implements OnGatewayConnection, OnGatewayDisconnec
   handleCreateMessage(@MessageBody() data: any) {
     console.log('Create Message');
     // here down below createMessage is the event we listen to from client side
-    this.server.emit(Subcriptions.BROADCAST,`${data}`)
+    this.server.emit(Subcriptions.BROADCAST, `${data}`);
   }
 
   @OnEvent(Subcriptions.MESSAGE_CREATE)
-  sendMessage(payload: Conversation){
+  sendMessage(payload: Conversation) {
     console.log('Inside conversation.create');
     const recipientSocket = this.sessions.getUserSocket(payload.recipientId);
-    if (recipientSocket) this.server.to(payload.recipientId).emit(Subcriptions.SEND_MESSAGE, payload);
+    if (recipientSocket)
+      this.server
+        .to(payload.recipientId)
+        .emit(Subcriptions.SEND_MESSAGE, payload);
   }
 }

@@ -38,5 +38,4 @@ export class PostMessage {
     message: 'Either recipientId or roomId should be present, but not both.',
   })
   eitherRecipientIdOrRoomId: string;
-
 }
