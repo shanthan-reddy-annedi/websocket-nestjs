@@ -6,6 +6,7 @@ import { GatewayModule } from './websocket/gateway.module';
 import { MessageModule } from './message/message.module';
 import { EventEmitterModule } from '@nestjs/event-emitter';
 import { peerModule } from './peerjs/Peer.modules';
+import { AuthModule } from './auth/auth.module';
 
 @Module({
   imports: [
@@ -14,7 +15,8 @@ import { peerModule } from './peerjs/Peer.modules';
     GatewayModule,
     MessageModule,
     EventEmitterModule.forRoot(),
-    peerModule
+    peerModule,
+    AuthModule
   ],
   controllers: [],
   providers: [],

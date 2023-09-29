@@ -1,6 +1,5 @@
 import { MiddlewareConsumer, Module, NestModule } from '@nestjs/common';
 import { PeerServer } from 'peer';
-import { Client } from 'socket.io/dist/client';
 
 @Module({})
 export class peerModule implements NestModule {

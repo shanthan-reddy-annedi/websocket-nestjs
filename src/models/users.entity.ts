@@ -1,5 +1,5 @@
-import { Exclude } from "class-transformer";
-import { Entity, PrimaryGeneratedColumn, Column } from "typeorm";
+import { Exclude } from 'class-transformer';
+import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm';
 
 @Entity({ name: 'users' })
 export class Users {
@@ -9,13 +9,13 @@ export class Users {
   @Column({ unique: true, nullable: false, name: 'user_name' })
   userName: string;
 
-  @Column({ nullable: true })
+  @Column({ nullable: false, unique: true })
   email: string;
 
   @Column()
   firstName: string;
 
-  @Column({nullable: true})
+  @Column({ nullable: true })
   lastName: string;
 
   @Column()
