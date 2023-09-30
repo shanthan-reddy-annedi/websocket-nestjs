@@ -1,6 +1,8 @@
 import { TypeOrmModuleOptions } from '@nestjs/typeorm';
 import * as dotenv from 'dotenv';
-import { Conversation } from 'src/models/conversation.entity';
+import { DirectConversation } from 'src/models/directConversation.entity';
+import { Group } from 'src/models/group.entity';
+import { GroupMember } from 'src/models/groupMember.entity';
 import { Message } from 'src/models/message.entity';
 import { Users } from 'src/models/users.entity';
 
@@ -15,5 +17,5 @@ export const typeOrmConfig: TypeOrmModuleOptions = {
   database: process.env.POSTGRES_DATABASE,
   logging: true,
   synchronize: true,
-  entities: [Users, Message, Conversation], // Match files with any extension
+  entities: [Users, Message, Group, GroupMember, DirectConversation], // Match files with any extension
 };

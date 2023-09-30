@@ -10,7 +10,6 @@ import { GatewaySessionManager } from './gateway.session';
 import { AuthenticatedSocket } from 'src/utils/interfaces';
 import { Server } from 'socket.io';
 import { OnEvent } from '@nestjs/event-emitter';
-import { Conversation } from 'src/models/conversation.entity';
 import { Subcriptions } from 'src/utils/Events';
 
 @WebSocketGateway({
@@ -50,7 +49,7 @@ export class MessagingGateway
   }
 
   @OnEvent(Subcriptions.MESSAGE_CREATE)
-  sendMessage(payload: Conversation) {
+  sendMessage(payload: any) {
     console.log('Inside conversation.create');
     const recipientSocket = this.sessions.getUserSocket(payload.recipientId);
     if (recipientSocket)

@@ -1,4 +1,5 @@
 import { IsNotEmpty, IsOptional, IsString, IsUUID, Validate, ValidateIf, ValidationArguments, ValidatorConstraint, ValidatorConstraintInterface } from 'class-validator';
+import { GlobalDto } from 'src/gobalDto/global.dto';
 
 @ValidatorConstraint({ name: 'eitherRecipientIdOrRoomId', async: false })
 export class EitherRecipientIdOrRoomIdConstraint implements ValidatorConstraintInterface {
@@ -18,9 +19,7 @@ export class EitherRecipientIdOrRoomIdConstraint implements ValidatorConstraintI
   }
 }
 
-export class PostMessage {
-  @IsUUID()
-  authorId: string;
+export class PostMessage extends GlobalDto {
 
   @IsUUID()
   @IsOptional()

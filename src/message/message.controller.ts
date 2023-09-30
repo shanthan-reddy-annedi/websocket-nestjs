@@ -1,4 +1,4 @@
-import { Body, Controller, Post } from '@nestjs/common';
+import { Body, Controller, Get, Post } from '@nestjs/common';
 import { MessageService } from './message.service';
 import { PostMessage } from './dto/message.dto';
 import { Routes } from 'src/utils/routs';
@@ -15,5 +15,10 @@ export class MessageController {
     } catch (error) {
       return { success: false, message: `Failed to create message: ${error}` };
     }
+  }
+
+  @Get()
+  async getUserMessages(){
+    //TODO: implement
   }
 }
