@@ -7,7 +7,6 @@ import { ChatType, ContentType } from 'src/utils/enum';
 
 @Entity()
 export class Message extends BaseEntity {
-
   @Column({
     type: 'enum',
     enum: ChatType,
@@ -32,12 +31,15 @@ export class Message extends BaseEntity {
   @Column({ nullable: true })
   gif_url: string;
 
-  @ManyToOne(()=> Group, (group) => group.message)
+  @ManyToOne(() => Group, (group) => group.message)
   group: Group;
 
-  @ManyToOne(()=> DirectConversation, (directConversation) => directConversation.message)
+  @ManyToOne(
+    () => DirectConversation,
+    (directConversation) => directConversation.message,
+  )
   conversation: DirectConversation;
 
-  @ManyToOne(()=> Users, (users) => users.message)
+  @ManyToOne(() => Users, (users) => users.message)
   sender: Users;
 }

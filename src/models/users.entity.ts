@@ -1,10 +1,9 @@
 import { Exclude } from 'class-transformer';
-import { Entity, PrimaryGeneratedColumn, Column, OneToMany } from 'typeorm';
+import { Entity, Column, OneToMany, ManyToMany } from 'typeorm';
 import { BaseEntity } from './base.entity';
 import { Message } from './message.entity';
 import { DirectConversation } from './directConversation.entity';
 import { Group } from './group.entity';
-import { GroupMember } from './groupMember.entity';
 
 @Entity({ name: 'users' })
 export class Users extends BaseEntity {
@@ -28,17 +27,17 @@ export class Users extends BaseEntity {
     () => DirectConversation,
     (directConversation) => directConversation.user1,
   )
-  directConversation1: DirectConversation;
+  directConversation1: DirectConversation[];
 
   @OneToMany(
     () => DirectConversation,
-    (directConversation) => directConversation.user1,
+    (directConversation) => directConversation.user2,
   )
-  directConversation2: DirectConversation;
+  directConversation2: DirectConversation[];
+
+  @ManyToMany(() => Group, (group) => group.members)
+  groups: Group[];
 
   @OneToMany(() => Group, (group) => group.creator)
-  group: Group;
-
-  @OneToMany(() => GroupMember, (groupMember) => groupMember.user)
-  groupMember: GroupMember;
+  createdGroups: Group[];
 }

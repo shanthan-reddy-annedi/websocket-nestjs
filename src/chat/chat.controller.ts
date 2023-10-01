@@ -10,12 +10,14 @@ export class ChatController {
 
   @Post(Routes.GROUP)
   async createGroupChat(@Body() createGroup: CreateGroupDto) {
-    console.log(createGroup);
+    const group = await this.chatService.createGroupChat(createGroup);
+    return group;
   }
 
   @Get(Routes.GETCHATLIST)
   async getChatList(@Body() user: UserDto) {
-    console.log(user);
+    const chatList = await this.chatService.getChatList(user);
+    return chatList;
   }
 
   @Post()
