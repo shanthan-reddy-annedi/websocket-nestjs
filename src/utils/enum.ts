@@ -1,11 +1,11 @@
 export enum ChatType {
-  GROUP = 'group',
-  ONE_ON_ONE = 'one-on-one',
+  GROUP = 'GROUP',
+  ONE_ON_ONE = 'ONE-ON-ONE',
 }
 
 export enum ContentType {
-  TEXT = 'text',
-  VIDEO = 'video',
-  AUDIO = 'audio',
-  GIF = 'gif',
+  TEXT = 'TEXT',
+  VIDEO = 'VIDEO',
+  AUDIO = 'AUDIO',
+  GIF = 'GIF',
 }

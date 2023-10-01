@@ -7,8 +7,6 @@ import { ChatType, ContentType } from 'src/utils/enum';
 
 @Entity()
 export class Message extends BaseEntity {
-  @Column({ nullable: true })
-  content: string;
 
   @Column({
     type: 'enum',

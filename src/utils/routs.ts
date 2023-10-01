@@ -3,5 +3,6 @@ export enum Routes {
   MESSAGE = 'message',
   AUTH = 'auth',
   CHAT = 'chat',
-  GROUP = 'group'
+  GROUP = 'group',
+  GETCHATLIST = 'getChatList',
 }

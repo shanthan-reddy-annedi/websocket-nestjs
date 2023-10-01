@@ -15,7 +15,7 @@ export class MessageService {
   ) {}
 
   async createMessage(message: PostMessage) {
-    const mess = this.messageRepository.create(message);
-    const savedMessage = await this.messageRepository.save(mess);
+    // const mess = this.messageRepository.create(message);
+    // const savedMessage = await this.messageRepository.save(mess);
   }
 }
