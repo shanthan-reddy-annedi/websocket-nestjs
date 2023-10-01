@@ -19,7 +19,7 @@ export class UsersService {
         userName: userDto.userName,
       },
     });
-    console.log(userPresent);
+    // console.log(userPresent);
     if (userPresent) {
       throw new HttpException(`User name already taken`, 402);
     }

@@ -7,7 +7,7 @@ import { MessageModule } from './message/message.module';
 import { EventEmitterModule } from '@nestjs/event-emitter';
 import { peerModule } from './peerjs/Peer.modules';
 import { AuthModule } from './auth/auth.module';
-import { ChatListModule } from './chat-list/chat-list.module';
+import { ChatModule } from './chat/chat.module';
 
 @Module({
   imports: [
@@ -18,7 +18,7 @@ import { ChatListModule } from './chat-list/chat-list.module';
     EventEmitterModule.forRoot(),
     peerModule,
     AuthModule,
-    ChatListModule
+    ChatModule
   ],
   controllers: [],
   providers: [],

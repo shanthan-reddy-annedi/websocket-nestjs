@@ -38,6 +38,7 @@ export class Users extends BaseEntity {
 
   @OneToMany(() => Group, (group) => group.creator)
   group: Group;
+
   @OneToMany(() => GroupMember, (groupMember) => groupMember.user)
   groupMember: GroupMember;
 }

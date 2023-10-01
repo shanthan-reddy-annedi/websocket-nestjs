@@ -1,7 +1,7 @@
 export enum Routes {
   USER = 'user',
   MESSAGE = 'message',
-  AUTH = 'auth'
+  AUTH = 'auth',
+  CHAT = 'chat',
+  GROUP = 'group'
 }
-
-

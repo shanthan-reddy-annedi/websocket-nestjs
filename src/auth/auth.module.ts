@@ -25,7 +25,7 @@ const jwtSecret = process.env.JWT_SECRET;
     JwtModule.register({
       global: true,
       secret: jwtSecret,
-      signOptions: { expiresIn: '6000s' },
+      signOptions: { expiresIn: '60000s' },
     }),
   ],
 })
