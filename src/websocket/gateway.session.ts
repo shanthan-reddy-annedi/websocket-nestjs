@@ -1,11 +1,10 @@
 import { Injectable } from '@nestjs/common';
 import { AuthenticatedSocket } from 'src/utils/interfaces';
 
-
-
 @Injectable()
 export class GatewaySessionManager {
-  private  static readonly sessions: Map<string, AuthenticatedSocket> = new Map();
+  private static readonly sessions: Map<string, AuthenticatedSocket> =
+    new Map();
 
   getUserSocket(id: string) {
     return GatewaySessionManager.sessions.get(id);
