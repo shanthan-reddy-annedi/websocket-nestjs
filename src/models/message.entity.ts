@@ -1,4 +1,4 @@
-import { Entity, PrimaryGeneratedColumn, ManyToOne, Column } from 'typeorm';
+import { Entity, ManyToOne, Column, JoinColumn } from 'typeorm';
 import { DirectConversation } from './directConversation.entity';
 import { Group } from './group.entity';
 import { Users } from './users.entity';
@@ -36,8 +36,9 @@ export class Message extends BaseEntity {
 
   @ManyToOne(
     () => DirectConversation,
-    (directConversation) => directConversation.message,
+    (directConversation) => directConversation.messages,
   )
+  @JoinColumn({ name: 'conversation_id' })
   conversation: DirectConversation;
 
   @ManyToOne(() => Users, (users) => users.message)

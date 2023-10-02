@@ -5,4 +5,5 @@ export enum Routes {
   CHAT = 'chat',
   GROUP = 'group',
   GETCHATLIST = 'getChatList',
+  DIRECTCHAT = "DirectChat"
 }
